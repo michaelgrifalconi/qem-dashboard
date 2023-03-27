@@ -79,6 +79,7 @@ t.test('Test dashboard ui', skip, async t => {
     t.equal(await list.count(), 0);
 
     await page.fill('[placeholder="Search for group names"]', 'SLE 12 SP5');
+    t.match(await page.innerText('tbody tr:nth-of-type(1) td:nth-of-type(2)'), /SLE 12 SP5/);
     t.equal(await list.count(), 1);
   });
 
