@@ -73,6 +73,7 @@ t.test('Test dashboard ui', skip, async t => {
     t.equal(await list.count(), 0);
 
     await page.fill('[placeholder="Search for incident/package"]', 'perl');
+    t.match(await page.innerText('tbody tr:nth-of-type(1) td:nth-of-type(2)'), /SLE 12 SP5 Kernel/);
     t.equal(await list.count(), 1);
 
     await page.fill('[placeholder="Search for group names"]', 'SLE');
@@ -80,7 +81,7 @@ t.test('Test dashboard ui', skip, async t => {
 
     await page.fill('[placeholder="Search for group names"]', 'SLE 12 SP5');
     t.match(await page.innerText('tbody tr:nth-of-type(1) td:nth-of-type(2)'), /SLE 12 SP5/);
-    t.match(await page.innerText('tbody tr:nth-of-type(1) td:nth-of-type(2)'), /SLE 12 SP5 Kernel/);
+    !t.match(await page.innerText('tbody tr:nth-of-type(1) td:nth-of-type(2)'), /SLE 12 SP5 Kernel/);
     t.equal(await list.count(), 1);
   });
 
