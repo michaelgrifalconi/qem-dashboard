@@ -71,6 +71,9 @@ t.test('Test dashboard ui', skip, async t => {
 
     await page.fill('[placeholder="Search for incident/package"]', 'curl');
     t.equal(await list.count(), 0);
+    
+    await page.fill('[placeholder="Search for incident/package"]', 'perl');
+    t.equal(await list.count(), 1);
   });
 
   await t.test('Incident popup', async t => {
