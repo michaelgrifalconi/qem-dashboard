@@ -71,8 +71,14 @@ t.test('Test dashboard ui', skip, async t => {
 
     await page.fill('[placeholder="Search for incident/package"]', 'curl');
     t.equal(await list.count(), 0);
-    
+
     await page.fill('[placeholder="Search for incident/package"]', 'perl');
+    t.equal(await list.count(), 1);
+
+    await page.fill('[placeholder="Search for group names"]', 'SLE');
+    t.equal(await list.count(), 0);
+
+    await page.fill('[placeholder="Search for group names"]', 'SLE 12 SP5');
     t.equal(await list.count(), 1);
   });
 
